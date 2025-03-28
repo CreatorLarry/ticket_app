@@ -1,0 +1,384 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background: rgba(25, 25, 25, 0.7); /* Dark gray transparent */
+    backdrop-filter: blur(5px);
+    border-radius: 50px;
+    padding: 12px 30px;
+    margin: 15px auto;
+    width: 90%;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Navbar Blur Effect on Scroll */
+.navbar.scrolled {
+    background: rgba(15, 15, 15, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 8px 25px;
+}
+
+/* Navbar Links */
+.navbar-nav {
+    display: flex;
+    gap: 40px; /* Increased spacing between links */
+}
+
+.navbar-nav .nav-link {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #f8f9fa;
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ffcc00; /* Highlight color */
+}
+
+/* Get Started Button */
+.nav-btn {
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-weight: bold;
+    background: linear-gradient(to right, #ff8800, #ff5500);
+    border: none;
+    transition: 0.3s;
+}
+
+.nav-btn:hover {
+    background: linear-gradient(to right, #ff5500, #ff8800);
+}
+
+@media (min-width: 992px) {
+    .navbar-nav .nav-btn {
+        display: none;
+    }
+}
+
+/* Hero Section */
+.hero {
+    background: url('../images/hero-bg.jpg') center/cover;
+    color: white;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.hero p {
+    font-size: 1.2rem;
+}
+
+.primary-btn {
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-weight: bold;
+    background: linear-gradient(to right, #ff8800, #ff5500);
+    border: none;
+    transition: 0.3s;
+}
+
+.primary-btn:hover {
+    background: linear-gradient(to right, #ff5500, #ff8800);
+}
+
+.event-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.event-card img {
+    height: 180px;
+    object-fit: cover;
+}
+
+.event-card .card-body {
+    text-align: center;
+    padding: 20px;
+}
+
+.event-card h5 {
+    font-weight: 600;
+    color: #333;
+}
+
+.event-date, .event-location, .event-price {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.event-price {
+    font-weight: bold;
+    color: #ff8800;
+}
+
+.event-category {
+    background: #ff5722;
+    color: white;
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    border-radius: 15px;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+
+/* Make event cards smaller on smaller screens */
+@media (max-width: 768px) {
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .col-md-4 {
+        flex: 0 0 48%; /* Ensures two cards per row */
+        max-width: 48%;
+    }
+
+    .card {
+        border-radius: 10px; /* Smooth edges */
+        overflow: hidden;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .card img {
+        width: 100%;
+        height: 150px; /* Keeps images uniform */
+        object-fit: cover;
+    }
+
+    .card-body {
+        padding: 12px;
+    }
+
+    .card-title {
+        font-size: 1rem;
+        font-weight: bold;
+    }
+
+    .card-text {
+        font-size: 0.85rem;
+    }
+
+    .btn {
+        display: block;
+        width: 80%;
+        margin: 10px auto;
+        padding: 6px 12px;
+        font-size: 0.85rem;
+        border-radius: 20px;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .event-card {
+        margin-bottom: 20px;
+    }
+}
+
+.trending-badge {
+    background: #ff9800;
+    color: white;
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    border-radius: 5px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+/* Trending Events Section */
+.trending-events .carousel-inner {
+    padding-bottom: 50px; /* Space for indicators */
+}
+
+.trending-events .carousel-indicators {
+    position: absolute;
+    bottom: 15px;
+}
+
+.trending-events .carousel-indicators button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.4);
+    margin: 0 5px;
+    transition: background-color 0.3s;
+}
+
+.trending-events .carousel-indicators button.active {
+    background-color: #ff5733;
+}
+
+/* Event Card Styling */
+.event-card {
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.event-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.event-card img {
+    height: 250px;
+    object-fit: cover;
+}
+
+.event-card .card-body {
+    text-align: center;
+    padding: 20px;
+}
+
+.event-card .card-title {
+    font-weight: 600;
+    color: #333;
+}
+
+.event-card .card-text {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.event-price {
+    color: #ff5733;
+    font-size: 1.1rem;
+}
+
+/* Carousel Controls */
+.custom-carousel-control {
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    transition: background-color 0.3s;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.custom-carousel-control:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.carousel-control-prev.custom-carousel-control {
+    left: 15px;
+}
+
+.carousel-control-next.custom-carousel-control {
+    right: 15px;
+}
+
+/* Responsive: One card per slide on smaller screens */
+@media (max-width: 768px) {
+    .trending-events .carousel-item .row {
+        flex-direction: column;
+    }
+
+    .trending-events .col-md-6 {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+/* Footer Styling */
+.footer {
+    background: #222;
+    color: #fff;
+    font-size: 0.9rem;
+}
+
+.footer-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.footer-link {
+    color: #ddd;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-link:hover {
+    color: #ff5733;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.social-icon {
+    color: #ddd;
+    font-size: 1.2rem;
+    transition: color 0.3s;
+}
+
+.social-icon:hover {
+    color: #ff5733;
+}
+
+/* Responsive Footer */
+@media (max-width: 768px) {
+    .footer .row {
+        text-align: center;
+    }
+}
+
+span {
+    color: #ff5733;
+}
+
+.developer-name {
+    text-decoration: none;
+}
+
+.developer {
+    font-weight: bold;
+    font-size: 1rem;
+}
