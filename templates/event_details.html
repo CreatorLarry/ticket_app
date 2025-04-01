@@ -1,0 +1,91 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Event Details</title>
+{% endblock %}
+
+{% block extra_css %}
+
+{% endblock %}
+
+{% block content %}
+    <section class="event-details container">
+        <div class="row">
+            <!-- Event Image -->
+            <div class="col-md-6">
+                <img src="{% static 'images/food.jpg' %}" alt="Event Image" class="event-img">
+            </div>
+
+            <!-- Event Information -->
+            <div class="col-md-6">
+                <h2 class="event-title">Food & Wine Festival</h2>
+                <p class="event-date"><i class="fas fa-calendar-alt"></i> May 10, 2025</p>
+                <p class="event-location"><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+
+                <!-- Ticket Category Selection -->
+                <label for="ticket-category"><strong>Select Ticket Type:</strong></label>
+                <select id="ticket-category" class="form-control">
+                    <option value="2000">Early Bird - Ksh 2,000</option>
+                    <option value="2500">Regular - Ksh 2,500</option>
+                    <option value="3000">Wave 1 - Ksh 3,000</option>
+                    <option value="3500">Wave 2 - Ksh 3,500</option>
+                    <option value="5000">VIP - Ksh 5,000</option>
+                    <option value="8000">VVIP - Ksh 8,000</option>
+                </select>
+
+                <!-- Quantity Selector -->
+                <div class="quantity-container mt-3">
+                    <button class="btn btn-outline-primary" onclick="changeQuantity(-1)">-</button>
+                    <span id="ticket-quantity">1</span>
+                    <button class="btn btn-outline-primary" onclick="changeQuantity(1)">+</button>
+                </div>
+
+                <!-- Total Price -->
+                <p class="event-price mt-2"><strong>Total Price: Ksh <span id="total-price">2,000</span></strong></p>
+
+                <!-- Buyer Details Form -->
+                <h4 class="mt-4">Your Details</h4>
+                <form id="buyer-form">
+                    <div class="mb-2">
+                        <label for="buyer-name">Full Name</label>
+                        <input type="text" id="buyer-name" class="form-control" required>
+                    </div>
+                    <div class="mb-2">
+                        <label for="buyer-email">Email</label>
+                        <input type="email" id="buyer-email" class="form-control" required>
+                    </div>
+                    <div class="mb-2">
+                        <label for="buyer-phone">Phone Number</label>
+                        <input type="text" id="buyer-phone" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary book-btn">Proceed to Payment</button>
+                </form>
+
+                <!-- Social Share -->
+                <div class="social-share mt-3">
+                    <span>Share:</span>
+                    <a href="{% url 'payment' %}" class="social-icon"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Event Info -->
+        <div class="event-extra mt-4">
+            <h3>Event Details</h3>
+            <p><strong>Time:</strong> 6:00 PM - 11:00 PM</p>
+            <p><strong>Venue:</strong> KICC, Nairobi</p>
+            <p><strong>Organizer:</strong> Kenya Food & Wine Association</p>
+            <p><strong>Contact:</strong> +254 712 345 678</p>
+        </div>
+    </section>
+
+
+{% endblock %}
+
+{% block extra_js %}
+
+{% endblock %}
+

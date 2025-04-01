@@ -51,3 +51,109 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+document.getElementById('ticket-category').addEventListener('change', updateTotal);
+let quantity = 1;
+
+function changeQuantity(amount) {
+    quantity = Math.max(1, quantity + amount);
+    document.getElementById('ticket-quantity').textContent = quantity;
+    updateTotal();
+}
+
+function updateTotal() {
+    let ticketPrice = parseInt(document.getElementById('ticket-category').value);
+    let totalPrice = ticketPrice * quantity;
+    document.getElementById('total-price').textContent = totalPrice.toLocaleString();
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    let paymentMethods = document.querySelectorAll('input[name="payment-method"]');
+    let mpesaInput = document.getElementById("mpesa-input");
+
+    // Show/hide relevant payment input
+    paymentMethods.forEach(method => {
+        method.addEventListener("change", function () {
+            if (this.value === "mpesa") {
+                mpesaInput.classList.add("active");
+            } else {
+                mpesaInput.classList.remove("active");
+            }
+        });
+    });
+
+    // Load order details dynamically (assuming data is passed via URL or session)
+    document.getElementById("event-name").textContent = localStorage.getItem("eventName") || "Food & Wine Festival";
+    document.getElementById("event-date").textContent = localStorage.getItem("eventDate") || "May 10, 2025";
+    document.getElementById("event-location").textContent = localStorage.getItem("eventLocation") || "Nairobi, Kenya";
+    document.getElementById("ticket-type").textContent = localStorage.getItem("ticketType") || "VIP";
+    document.getElementById("ticket-quantity").textContent = localStorage.getItem("ticketQuantity") || "2";
+    document.getElementById("total-price").textContent = localStorage.getItem("totalPrice") || "10,000";
+});
+
+function increaseQty(button) {
+    let qtyElement = button.previousElementSibling;
+    let qty = parseInt(qtyElement.innerText);
+    qtyElement.innerText = qty + 1;
+    updateCartTotal();
+}
+
+function decreaseQty(button) {
+    let qtyElement = button.nextElementSibling;
+    let qty = parseInt(qtyElement.innerText);
+    if (qty > 1) {
+        qtyElement.innerText = qty - 1;
+        updateCartTotal();
+    }
+}
+
+function updateCartTotal() {
+    let subtotal = 0;
+    let serviceFee = 200;
+
+    document.querySelectorAll(".cart-item").forEach(item => {
+        let priceText = item.querySelector(".price").innerText;
+        let price = parseInt(priceText.replace("Ksh ", "").replace(",", ""));
+        let qty = parseInt(item.querySelector(".qty").innerText);
+
+        subtotal += price * qty;
+    });
+
+    document.getElementById("subtotal").innerText = "Ksh " + subtotal.toLocaleString();
+    document.getElementById("total").innerText = "Ksh " + (subtotal + serviceFee).toLocaleString();
+}
+
+// Update total on page load
+document.addEventListener("DOMContentLoaded", updateCartTotal);
+
+function addTicket() {
+    let ticketSection = document.getElementById("ticket-section");
+    let newTicket = document.createElement("div");
+    newTicket.classList.add("ticket-category", "mb-2");
+    newTicket.innerHTML = `
+        <input type="text" name="ticket_type[]" class="form-control mb-2" placeholder="Ticket Type (e.g., VIP, Early Bird)" required>
+        <input type="number" name="ticket_price[]" class="form-control mb-2" placeholder="Price (Ksh)" required>
+        <input type="number" name="ticket_quantity[]" class="form-control mb-2" placeholder="Available Quantity" required>
+    `;
+    ticketSection.appendChild(newTicket);
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Get all radio buttons
+    const paymentRadios = document.querySelectorAll('input[name="payment-method"]');
+
+    // Add event listeners to all radio buttons
+    paymentRadios.forEach(radio => {
+        radio.addEventListener('change', function () {
+            showPaymentFields(this.value);
+        });
+    });
+
+    // Function to show the selected payment fields
+    function showPaymentFields(method) {
+        // Hide all payment fields
+        document.querySelectorAll('.payment-detail').forEach(el => el.style.display = 'none');
+
+        // Show the selected method's fields
+        document.getElementById(method + '-fields').style.display = 'block';
+    }
+});

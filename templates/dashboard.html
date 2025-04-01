@@ -1,0 +1,67 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Dashboard</title>
+{% endblock %}
+
+{% block extra_css %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="dashboard container">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3">
+                <div class="sidebar">
+                    <h3>Dashboard</h3>
+                    <ul>
+                        <li><a href="#">🏠 Home</a></li>
+                        <li><a href="#">🎟 My Tickets</a></li>
+                        <li><a href="#">⚙️ Profile Settings</a></li>
+                        <li><a href="#">🚪 Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9">
+                <h2>My Tickets</h2>
+                <div class="ticket-list">
+                    <!-- Example Ticket -->
+                    <div class="ticket-card">
+                        <div class="ticket-info">
+                            <h4>Food & Wine Festival</h4>
+                            <p><i class="fas fa-calendar-alt"></i> May 10, 2025</p>
+                            <p><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+                            <p class="status active">✅ Active</p>
+                        </div>
+                        <div class="ticket-actions">
+                            <a href="#" class="btn btn-primary">Download PDF</a>
+                            <a href="#" class="btn btn-outline-secondary">View QR Code</a>
+                        </div>
+                    </div>
+
+                    <div class="ticket-card">
+                        <div class="ticket-info">
+                            <h4>International Marathon</h4>
+                            <p><i class="fas fa-calendar-alt"></i> June 20, 2025</p>
+                            <p><i class="fas fa-map-marker-alt"></i> Mombasa, Kenya</p>
+                            <p class="status expired">❌ Expired</p>
+                        </div>
+                        <div class="ticket-actions">
+                            <a href="#" class="btn btn-secondary disabled">Download PDF</a>
+                            <a href="#" class="btn btn-outline-secondary">View QR Code</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+
+{% endblock %}
+

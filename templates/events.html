@@ -1,0 +1,132 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Events</title>
+{% endblock %}
+
+{% block extra_css %}
+
+{% endblock %}
+
+{% block content %}
+    <section class="search-filter-section container search-filter-section-top">
+        <div class="row align-items-center">
+            <!-- Search Field -->
+            <div class="col-md-6">
+                <form class="d-flex search-form">
+                    <input class="form-control search-input" type="search" placeholder="Search events..."
+                           aria-label="Search">
+                    <button class="btn search-btn" type="submit"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+
+            <!-- Filters -->
+            <div class="col-md-6 d-flex justify-content-end">
+                <select class="form-select filter-dropdown me-2">
+                    <option selected>Category</option>
+                    <option value="Music">Music</option>
+                    <option value="Tech">Tech</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Food">Food</option>
+                </select>
+
+                <select class="form-select filter-dropdown">
+                    <option selected>Location</option>
+                    <option value="Nairobi">Nairobi</option>
+                    <option value="Mombasa">Mombasa</option>
+                    <option value="Kisumu">Kisumu</option>
+                    <option value="Eldoret">Eldoret</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <section class="container event-container">
+        <h2 class="text-center mb-4">Upcoming Events</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <a href="{% url 'event_details' %}" class="card event-card">
+                    <img src="{% static 'images/food.jpg' %}" class="card-img-top" alt="Food Festival">
+                    <div class="card-body">
+                        <h5 class="card-title">Food Festival</h5>
+                        <p class="event-date"><i class="fas fa-calendar-alt"></i> June 5, 2025</p>
+                        <p class="event-location"><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+                        <p class="event-price"><i class="fas fa-tag"></i> From Ksh 800</p>
+                        <span class="badge event-category">Food</span>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="#" class="card event-card">
+                    <img src="{% static 'images/concert.jpg' %}" class="card-img-top" alt="Live Concert">
+                    <div class="card-body">
+                        <h5 class="card-title">Live Concert</h5>
+                        <p class="event-date"><i class="fas fa-calendar-alt"></i> May 10, 2025</p>
+                        <p class="event-location"><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+                        <p class="event-price"><i class="fas fa-tag"></i> From Ksh 1,500</p>
+                        <span class="badge trending-badge">🔥 Trending</span>
+                        <span class="badge event-category">Music</span>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="#" class="card event-card">
+                    <img src="{% static 'images/tech.jpg' %}" class="card-img-top" alt="Tech Conference">
+                    <div class="card-body">
+                        <h5 class="card-title">Tech Conference</h5>
+                        <p class="event-date"><i class="fas fa-calendar-alt"></i> May 10, 2025</p>
+                        <p class="event-location"><i class="fas fa-map-marker-alt"></i> Mombasa, Kenya</p>
+                        <p class="event-price"><i class="fas fa-tag"></i> Free</p>
+                        <span class="badge event-category">Tech</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expired Events Section -->
+    <section class="container my-5">
+        <h2 class="text-center mb-4">Expired Events</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card event-card expired-event">
+                    <img src="{% static 'images/concert.jpg' %}" class="card-img-top" alt="Live Concert">
+                    <div class="card-body">
+                        <h5 class="card-title">Live Concert</h5>
+                        <p class="event-date"><i class="fas fa-calendar-alt"></i> March 5, 2025</p>
+                        <p class="event-location"><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+                        <span class="badge event-category">Music</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card event-card expired-event">
+                    <img src="{% static 'images/tech.jpg' %}" class="card-img-top" alt="Tech Conference">
+                    <div class="card-body">
+                        <h5 class="card-title">Tech Conference</h5>
+                        <p class="event-date"><i class="fas fa-calendar-alt"></i> February 15, 2025</p>
+                        <p class="event-location"><i class="fas fa-map-marker-alt"></i> Mombasa, Kenya</p>
+                        <span class="badge event-category">Tech</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card event-card expired-event">
+                    <img src="{% static 'images/food.jpg' %}" class="card-img-top" alt="Food Festival">
+                    <div class="card-body">
+                        <h5 class="card-title">Food Festival</h5>
+                        <p class="event-date"><i class="fas fa-calendar-alt"></i> January 20, 2025</p>
+                        <p class="event-location"><i class="fas fa-map-marker-alt"></i> Kisumu, Kenya</p>
+                        <span class="badge event-category">Food</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block extra_js %}
+
+{% endblock %}
+

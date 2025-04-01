@@ -1,0 +1,83 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Organizer Signup</title>
+{% endblock %}
+
+{% block extra_css %}
+
+{% endblock %}
+
+{% block content %}
+    <section class="container organizer-page">
+        <h2 class="text-center mb-4">Become an Event Organizer</h2>
+
+        <div class="row">
+            <!-- Organizer Info & Benefits -->
+            <div class="col-md-6">
+                <img src="{% static 'images/organizer.png' %}" class="img-fluid rounded mb-4" alt="Organizer">
+                <p class="lead">Join TicketVerse and gain access to powerful tools to create, manage, and sell tickets
+                    for your events.</p>
+
+                <ul class="list-group mb-4">
+                    <li class="list-group-item"><i class="fas fa-check-circle text-success"></i> List unlimited events
+                    </li>
+                    <li class="list-group-item"><i class="fas fa-check-circle text-success"></i> Get real-time sales
+                        analytics
+                    </li>
+                    <li class="list-group-item"><i class="fas fa-check-circle text-success"></i> Secure and fast payment
+                        processing
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Registration & Login Section -->
+            <div class="col-md-6">
+                <div class="shadow p-4 bg-white rounded">
+                    <h4 class="mb-3">Register as an Organizer</h4>
+
+                    <form action="#" method="POST">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" name="name" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" name="email" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" name="phone" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" name="password" class="form-control" required>
+                        </div>
+
+                        <button type="submit" class="auth-btn w-100">Sign Up</button>
+                    </form>
+
+                    <hr class="my-4">
+
+                    <p class="text-center">Already an organizer?</p>
+                    <a href="{% url 'organizer_dashboard' %}" class="btn btn-lg btn-warning w-100">Log in</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </section>
+
+
+{% endblock %}
+
+{% block extra_js %}
+
+{% endblock %}
+

@@ -10,6 +10,221 @@
 {% endblock %}
 
 {% block content %}
+    <!-- Hero Section -->
+    <header class="hero d-flex flex-column justify-content-center">
+        <div class="container text-center">
+            <h1>Find & Book Tickets for Your Favorite Events</h1>
+            <p>Secure and seamless event ticketing system</p>
+            <a href="{% url 'events' %}" class="btn btn-lg btn-warning">Browse Events</a>
+        </div>
+    </header>
+    <section class="search-filter-section container mt-4">
+        <div class="row align-items-center">
+            <!-- Search Field -->
+            <div class="col-md-6">
+                <form class="d-flex search-form">
+                    <input class="form-control search-input" type="search" placeholder="Search events..."
+                           aria-label="Search">
+                    <button class="btn search-btn" type="submit"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+
+            <!-- Filters -->
+            <div class="col-md-6 d-flex justify-content-end">
+                <select class="form-select filter-dropdown me-2">
+                    <option selected>Category</option>
+                    <option value="Music">Music</option>
+                    <option value="Tech">Tech</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Food">Food</option>
+                </select>
+
+                <select class="form-select filter-dropdown">
+                    <option selected>Location</option>
+                    <option value="Nairobi">Nairobi</option>
+                    <option value="Mombasa">Mombasa</option>
+                    <option value="Kisumu">Kisumu</option>
+                    <option value="Eldoret">Eldoret</option>
+                </select>
+            </div>
+        </div>
+    </section>
+    <!-- Featured Events -->
+    <section class="container my-5">
+        <h2 class="text-center mb-4">Upcoming Events</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <a href="#" class="card event-card">
+                    <img src="{% static 'images/concert.jpg' %}" class="card-img-top" alt="Live Concert">
+                    <div class="card-body">
+                        <h5 class="card-title">Live Concert</h5>
+                        <p class="event-date"><i class="fas fa-calendar-alt"></i> May 10, 2025</p>
+                        <!--                    <p class="event-countdown" data-date="2025-04-15"></p>-->
+                        <p class="event-location"><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+                        <p class="event-price"><i class="fas fa-tag"></i> From Ksh 1,500</p>
+                        <span class="badge trending-badge">🔥 Trending</span>
+                        <span class="badge event-category">Music</span>
+
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="#" class="card event-card">
+                    <img src="{% static 'images/tech.jpg' %}" class="card-img-top"
+                         alt="Tech Conference">
+                    <div class="card-body">
+                        <h5 class="card-title">Tech Conference</h5>
+                        <p class="event-date"><i class="fas fa-calendar-alt"></i> May 10, 2025</p>
+                        <p class="event-location"><i class="fas fa-map-marker-alt"></i> Mombasa, Kenya</p>
+                        <p class="event-price"><i class="fas fa-tag"></i> Free</p>
+                        <span class="badge event-category">Tech</span>
+
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="#" class="card event-card">
+                    <img src="{% static 'images/food.jpg' %}" class="card-img-top" alt="Food Festival">
+                    <div class="card-body">
+                        <h5 class="card-title">Food Festival</h5>
+                        <p class="event-date"><i class="fas fa-calendar-alt"></i> June 5, 2025</p>
+                        <p class="event-location"><i class="fas fa-map-marker-alt"></i> Kisumu, Kenya</p>
+                        <p class="event-price"><i class="fas fa-tag"></i> From Ksh 800</p>
+                        <span class="badge event-category">Food</span>
+
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="container my-5 trending-events">
+        <h2 class="text-center mb-4">🔥 Trending Events</h2>
+        <div id="trendingCarousel" class="carousel slide" data-bs-ride="carousel">
+            <!-- Carousel Indicators -->
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#trendingCarousel" data-bs-slide-to="0" class="active"
+                        aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#trendingCarousel" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+            </div>
+
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card event-card" onclick="location.href='#';">
+                                <img src="{% static 'images/run.jpg' %}" class="card-img-top"
+                                     alt="Rock Music Festival">
+                                <div class="card-body">
+                                    <span class="badge trending-badge">🔥 Trending</span>
+                                    <h5 class="card-title">Run For The Bibless</h5>
+                                    <p class="card-text">Coming together to fund christian organizations buy and
+                                        distribute
+                                        bibles.</p>
+                                    <p class="event-price"><strong>Starting at: Ksh 1,500</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card event-card" onclick="location.href='#';">
+                                <img src="{% static 'images/global.jpg' %}" class="card-img-top"
+                                     alt="Global Business Summit">
+                                <div class="card-body">
+                                    <span class="badge trending-badge">🔥 Trending</span>
+                                    <h5 class="card-title">Global Business Summit</h5>
+                                    <p class="card-text">Network with top business leaders and entrepreneurs.</p>
+                                    <p class="event-price"><strong>Starting at: Ksh 3,000</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card event-card" onclick="location.href='#';">
+                                <img src="{% static 'images/wine.jpg' %}" class="card-img-top"
+                                     alt="Food & Wine Festival">
+                                <div class="card-body">
+                                    <span class="badge trending-badge">🔥 Trending</span>
+                                    <h5 class="card-title">Food & Wine Festival</h5>
+                                    <p class="card-text">Savor the best cuisines and wine selections worldwide.</p>
+                                    <p class="event-price"><strong>Starting at: Ksh 2,000</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card event-card" onclick="location.href='#';">
+                                <img src="{% static 'images/run.jpg' %}" class="card-img-top"
+                                     alt="International Marathon">
+                                <div class="card-body">
+                                    <span class="badge trending-badge">🔥 Trending</span>
+                                    <h5 class="card-title">International Marathon</h5>
+                                    <p class="card-text">Join thousands of runners in the most exciting marathon of the
+                                        year.</p>
+                                    <p class="event-price"><strong>Starting at: Ksh 1,200</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Custom Carousel Controls -->
+            <button class="carousel-control-prev custom-carousel-control" type="button"
+                    data-bs-target="#trendingCarousel"
+                    data-bs-slide="prev">
+                <span class="carousel-control-icon">&larr;</span>
+            </button>
+            <button class="carousel-control-next custom-carousel-control" type="button"
+                    data-bs-target="#trendingCarousel"
+                    data-bs-slide="next">
+                <span class="carousel-control-icon">&rarr;</span>
+            </button>
+        </div>
+    </section>
+
+    <section class="container my-5">
+        <h2 class="text-center mb-4">Expired Events</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card event-card expired-event">
+                    <img src="{% static 'images/concert.jpg' %}" class="card-img-top" alt="Live Concert">
+                    <div class="card-body">
+                        <h5 class="card-title">Live Concert</h5>
+                        <p class="event-date"><i class="fas fa-calendar-alt"></i> March 5, 2025</p>
+                        <p class="event-location"><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+                        <span class="badge event-category">Music</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card event-card expired-event">
+                    <img src="{% static 'images/tech.jpg' %}" class="card-img-top" alt="Tech Conference">
+                    <div class="card-body">
+                        <h5 class="card-title">Tech Conference</h5>
+                        <p class="event-date"><i class="fas fa-calendar-alt"></i> February 15, 2025</p>
+                        <p class="event-location"><i class="fas fa-map-marker-alt"></i> Mombasa, Kenya</p>
+                        <span class="badge event-category">Tech</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card event-card expired-event">
+                    <img src="{% static 'images/food.jpg' %}" class="card-img-top" alt="Food Festival">
+                    <div class="card-body">
+                        <h5 class="card-title">Food Festival</h5>
+                        <p class="event-date"><i class="fas fa-calendar-alt"></i> January 20, 2025</p>
+                        <p class="event-location"><i class="fas fa-map-marker-alt"></i> Kisumu, Kenya</p>
+                        <span class="badge event-category">Food</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 {% endblock %}
 

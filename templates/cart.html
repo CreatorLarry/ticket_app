@@ -1,0 +1,70 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Cart</title>
+{% endblock %}
+
+{% block extra_css %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="container cart-page">
+        <h2 class="text-center">🛒 Your Cart</h2>
+
+        <!-- Cart Items -->
+        <div class="row">
+            <div class="col-md-8">
+                <div class="cart-item">
+                    <img src="{% static 'images/food.jpg' %}" alt="Food Festival" class="cart-img">
+                    <div class="cart-info">
+                        <h4>Food & Wine Festival</h4>
+                        <p><i class="fas fa-calendar-alt"></i> May 10, 2025</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+                        <p class="price">Ksh 2,000</p>
+                        <div class="quantity">
+                            <button class="qty-btn" onclick="decreaseQty(this)">-</button>
+                            <span class="qty">1</span>
+                            <button class="qty-btn" onclick="increaseQty(this)">+</button>
+                        </div>
+                    </div>
+                    <button class="remove-btn">🗑️</button>
+                </div>
+
+                <div class="cart-item">
+                    <img src="{% static 'images/run.jpg' %}" alt="Marathon" class="cart-img">
+                    <div class="cart-info">
+                        <h4>International Marathon</h4>
+                        <p><i class="fas fa-calendar-alt"></i> June 20, 2025</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Mombasa, Kenya</p>
+                        <p class="price">Ksh 1,500</p>
+                        <div class="quantity">
+                            <button class="qty-btn" onclick="decreaseQty(this)">-</button>
+                            <span class="qty">1</span>
+                            <button class="qty-btn" onclick="increaseQty(this)">+</button>
+                        </div>
+                    </div>
+                    <button class="remove-btn">🗑️</button>
+                </div>
+            </div>
+
+            <!-- Summary -->
+            <div class="col-md-4">
+                <div class="cart-summary">
+                    <h3>Order Summary</h3>
+                    <p>Subtotal: <span id="subtotal">Ksh 3,500</span></p>
+                    <p>Service Fee: <span>Ksh 200</span></p>
+                    <h4>Total: <span id="total">Ksh 3,700</span></h4>
+                    <a href="#" class="btn btn-primary btn-block">Proceed to Checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block extra_js %}
+
+{% endblock %}
+
