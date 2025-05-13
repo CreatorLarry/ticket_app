@@ -84,7 +84,8 @@ DATABASES = {
         'PORT': '3306',
         'OPTIONS': {
             'charset': 'utf8mb4',  # Ensures proper storage of Unicode characters
-            'init_command': "SET default_storage_engine=INNODB;"
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES', default_storage_engine=INNODB;"
+
         },
     }
 }
@@ -96,6 +97,8 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
+
+MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -114,6 +117,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+AUTH_USER_MODEL = 'main.Organizer'
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
@@ -135,6 +140,9 @@ STATIC_ROOT = BASE_DIR / 'assets'
 
 STATICFILES_DIRS = [BASE_DIR / 'main/assets']
 
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = BASE_DIR / 'media'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 

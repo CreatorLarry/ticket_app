@@ -31,12 +31,27 @@
                     <i class="fas fa-shopping-cart"></i>
                     <span class="cart-badge">3</span> <!-- Dynamic cart count -->
                 </a>
-                <li class="nav-item d-lg-none"><a class="btn btn-primary nav-btn" href="{% url 'organizer' %}">Become An Organizer</a></li>
+                <li class="nav-item d-lg-none"><a class="btn btn-primary nav-btn" href="{% url 'organizer' %}">Become An
+                    Organizer</a></li>
             </ul>
         </div>
         <a class="btn btn-primary nav-btn d-none d-lg-block" href="{% url 'organizer' %}">Become An Organizer</a>
     </div>
 </nav>
+
+
+<!-- Flash Messages -->
+{% if messages %}
+    <div class="container mt-3">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
 
 {% block content %}
 

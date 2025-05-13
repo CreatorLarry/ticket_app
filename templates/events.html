@@ -6,124 +6,94 @@
 {% endblock %}
 
 {% block extra_css %}
-
 {% endblock %}
 
 {% block content %}
-    <section class="search-filter-section container search-filter-section-top">
-        <div class="row align-items-center">
-            <!-- Search Field -->
-            <div class="col-md-6">
-                <form class="d-flex search-form">
-                    <input class="form-control search-input" type="search" placeholder="Search events..."
-                           aria-label="Search">
-                    <button class="btn search-btn" type="submit"><i class="fas fa-search"></i></button>
-                </form>
-            </div>
+    <div class="section-wrapper">
+        <section class="search-filter-section container search-filter-section-top">
+            <div class="row align-items-center">
+                <!-- Search Field -->
+                <div class="col-md-6">
+                    <form class="d-flex search-form" method="GET">
+                        <input class="form-control search-input" type="search" name="search"
+                               placeholder="Search events..."
+                               value="{{ request.GET.search }}">
+                        <button class="btn search-btn" type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
 
-            <!-- Filters -->
-            <div class="col-md-6 d-flex justify-content-end">
-                <select class="form-select filter-dropdown me-2">
-                    <option selected>Category</option>
-                    <option value="Music">Music</option>
-                    <option value="Tech">Tech</option>
-                    <option value="Sports">Sports</option>
-                    <option value="Food">Food</option>
-                </select>
+                <!-- Filters -->
+                <div class="col-md-6 d-flex justify-content-end">
+                    <select class="form-select filter-dropdown me-2" name="category" onchange="this.form.submit()">
+                        <option selected>Category</option>
+                        <option value="Music" {% if request.GET.category == "Music" %}selected{% endif %}>Music</option>
+                        <option value="Tech" {% if request.GET.category == "Tech" %}selected{% endif %}>Tech</option>
+                        <option value="Sports" {% if request.GET.category == "Sports" %}selected{% endif %}>Sports
+                        </option>
+                        <option value="Food" {% if request.GET.category == "Food" %}selected{% endif %}>Food</option>
+                    </select>
 
-                <select class="form-select filter-dropdown">
-                    <option selected>Location</option>
-                    <option value="Nairobi">Nairobi</option>
-                    <option value="Mombasa">Mombasa</option>
-                    <option value="Kisumu">Kisumu</option>
-                    <option value="Eldoret">Eldoret</option>
-                </select>
-            </div>
-        </div>
-    </section>
-
-    <section class="container event-container">
-        <h2 class="text-center mb-4">Upcoming Events</h2>
-        <div class="row">
-            <div class="col-md-4">
-                <a href="{% url 'event_details' %}" class="card event-card">
-                    <img src="{% static 'images/food.jpg' %}" class="card-img-top" alt="Food Festival">
-                    <div class="card-body">
-                        <h5 class="card-title">Food Festival</h5>
-                        <p class="event-date"><i class="fas fa-calendar-alt"></i> June 5, 2025</p>
-                        <p class="event-location"><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
-                        <p class="event-price"><i class="fas fa-tag"></i> From Ksh 800</p>
-                        <span class="badge event-category">Food</span>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="#" class="card event-card">
-                    <img src="{% static 'images/concert.jpg' %}" class="card-img-top" alt="Live Concert">
-                    <div class="card-body">
-                        <h5 class="card-title">Live Concert</h5>
-                        <p class="event-date"><i class="fas fa-calendar-alt"></i> May 10, 2025</p>
-                        <p class="event-location"><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
-                        <p class="event-price"><i class="fas fa-tag"></i> From Ksh 1,500</p>
-                        <span class="badge trending-badge">🔥 Trending</span>
-                        <span class="badge event-category">Music</span>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="#" class="card event-card">
-                    <img src="{% static 'images/tech.jpg' %}" class="card-img-top" alt="Tech Conference">
-                    <div class="card-body">
-                        <h5 class="card-title">Tech Conference</h5>
-                        <p class="event-date"><i class="fas fa-calendar-alt"></i> May 10, 2025</p>
-                        <p class="event-location"><i class="fas fa-map-marker-alt"></i> Mombasa, Kenya</p>
-                        <p class="event-price"><i class="fas fa-tag"></i> Free</p>
-                        <span class="badge event-category">Tech</span>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Expired Events Section -->
-    <section class="container my-5">
-        <h2 class="text-center mb-4">Expired Events</h2>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card event-card expired-event">
-                    <img src="{% static 'images/concert.jpg' %}" class="card-img-top" alt="Live Concert">
-                    <div class="card-body">
-                        <h5 class="card-title">Live Concert</h5>
-                        <p class="event-date"><i class="fas fa-calendar-alt"></i> March 5, 2025</p>
-                        <p class="event-location"><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
-                        <span class="badge event-category">Music</span>
-                    </div>
+                    <select class="form-select filter-dropdown" name="location" onchange="this.form.submit()">
+                        <option selected>Location</option>
+                        <option value="Nairobi" {% if request.GET.location == "Nairobi" %}selected{% endif %}>Nairobi
+                        </option>
+                        <option value="Mombasa" {% if request.GET.location == "Mombasa" %}selected{% endif %}>Mombasa
+                        </option>
+                        <option value="Kisumu" {% if request.GET.location == "Kisumu" %}selected{% endif %}>Kisumu
+                        </option>
+                        <option value="Eldoret" {% if request.GET.location == "Eldoret" %}selected{% endif %}>Eldoret
+                        </option>
+                    </select>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card event-card expired-event">
-                    <img src="{% static 'images/tech.jpg' %}" class="card-img-top" alt="Tech Conference">
-                    <div class="card-body">
-                        <h5 class="card-title">Tech Conference</h5>
-                        <p class="event-date"><i class="fas fa-calendar-alt"></i> February 15, 2025</p>
-                        <p class="event-location"><i class="fas fa-map-marker-alt"></i> Mombasa, Kenya</p>
-                        <span class="badge event-category">Tech</span>
+        </section>
+
+        <section class="container event-container">
+            <h2 class="text-center mb-4">Upcoming Events</h2>
+            <div class="row">
+                {% for event in upcoming_events %}
+                    <div class="col-md-4">
+                        <a href="{% url 'event_details' event.id %}" class="card event-card">
+                            <img src="{{ event.image.url }}" class="card-img-top" alt="{{ event.title }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ event.title }}</h5>
+                                <p class="event-date"><i class="fas fa-calendar-alt"></i> {{ event.date }}</p>
+                                <p class="event-location"><i class="fas fa-map-marker-alt"></i> {{ event.location }}</p>
+                                <p class="event-price"><i class="fas fa-tag"></i> From Ksh {{ event.price }}</p>
+                                <span class="badge event-category">{{ event.category }}</span>
+                            </div>
+                        </a>
                     </div>
-                </div>
+                {% empty %}
+                    <p class="text-center">No upcoming events available.</p>
+                {% endfor %}
             </div>
-            <div class="col-md-4">
-                <div class="card event-card expired-event">
-                    <img src="{% static 'images/food.jpg' %}" class="card-img-top" alt="Food Festival">
-                    <div class="card-body">
-                        <h5 class="card-title">Food Festival</h5>
-                        <p class="event-date"><i class="fas fa-calendar-alt"></i> January 20, 2025</p>
-                        <p class="event-location"><i class="fas fa-map-marker-alt"></i> Kisumu, Kenya</p>
-                        <span class="badge event-category">Food</span>
+        </section>
+
+        <!-- Expired Events Section -->
+        <section class="container my-5">
+            <h2 class="text-center mb-4">Expired Events</h2>
+            <div class="row">
+                {% for event in expired_events %}
+                    <div class="col-md-4">
+                        <div class="card event-card expired-event">
+                            <img src="{{ event.image.url }}" class="card-img-top" alt="{{ event.title }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ event.title }}</h5>
+                                <p class="event-date"><i class="fas fa-calendar-alt"></i> {{ event.date }}</p>
+                                <p class="event-location"><i class="fas fa-map-marker-alt"></i> {{ event.location }}</p>
+                                <span class="badge event-category">{{ event.category }}</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                {% empty %}
+                    <p class="text-center">No expired events yet.</p>
+                {% endfor %}
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
+
+
 {% endblock %}
 
 {% block extra_js %}

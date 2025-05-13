@@ -1,0 +1,105 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Edit Event</title>
+{% endblock %}
+
+{% block extra_css %}
+
+{% endblock %}
+
+{% block content %}
+    <section class="container create-event">
+        <h2 class="text-center mb-4">🎟️ Create New Event</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="row">
+                <!-- Left Column -->
+                <div class="col-md-6">
+                    <!-- Event Name -->
+                    <div class="mb-3">
+                        <label for="event_name" class="form-label">Event Name</label>
+                        <input type="text" id="event_name" name="event_name" class="form-control"
+                               placeholder="Enter event name" required>
+                    </div>
+
+                    <!-- Date & Time -->
+                    <div class="mb-3">
+                        <label class="form-label">Event Date & Time</label>
+                        <div class="input-group">
+                            <input type="date" name="event_date" class="form-control" required>
+                            <input type="time" name="event_time" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="mb-3">
+                        <label for="event_location" class="form-label">Location</label>
+                        <input type="text" id="event_location" name="event_location" class="form-control"
+                               placeholder="Enter event location" required>
+                    </div>
+
+                    <!-- Max Attendees -->
+                    <div class="mb-3">
+                        <label for="max_attendees" class="form-label">Maximum Attendees</label>
+                        <input type="number" id="max_attendees" name="max_attendees" class="form-control"
+                               placeholder="Enter max attendees" required>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="mb-3">
+                        <label for="contact_info" class="form-label">Contact Info</label>
+                        <input type="text" id="contact_info" name="contact_info" class="form-control"
+                               placeholder="Phone or Email" required>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="col-md-6">
+                    <!-- Ticket Categories -->
+                    <h5>🎫 Ticket Categories & Pricing</h5>
+                    <div id="ticket-section">
+                        <div class="ticket-category mb-2">
+                            <input type="text" name="ticket_type[]" class="form-control mb-2"
+                                   placeholder="Ticket Type (e.g., VIP, Early Bird)" required>
+                            <input type="number" name="ticket_price[]" class="form-control mb-2"
+                                   placeholder="Price (Ksh)" required>
+                            <input type="number" name="ticket_quantity[]" class="form-control mb-2"
+                                   placeholder="Available Quantity" required>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-outline-primary btn-sm" onclick="addTicket()">+ Add Ticket
+                        Type
+                    </button>
+
+                    <!-- Event Banner -->
+                    <div class="mb-3 mt-3">
+                        <label for="event_banner" class="form-label">Upload Event Banner</label>
+                        <input type="file" id="event_banner" name="event_banner" class="form-control" required>
+                    </div>
+
+                    <!-- Event Description -->
+                    <div class="mb-3">
+                        <label for="event_description" class="form-label">Event Description</label>
+                        <textarea id="event_description" name="event_description" class="form-control" rows="5"
+                                  placeholder="Provide event details" required></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Save Draft & Publish Buttons -->
+            <div class="text-center mt-4">
+                <button type="submit" name="draft" class="btn btn-outline-secondary me-2">💾 Save as Draft</button>
+                <button type="submit" name="publish" class="btn btn-primary">🚀 Publish Event</button>
+            </div>
+        </form>
+    </section>
+{% endblock %}
+
+
+{% block extra_js %}
+
+{% endblock %}
+

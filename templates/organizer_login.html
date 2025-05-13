@@ -1,0 +1,86 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Organizer Login</title>
+{% endblock %}
+
+{% block extra_css %}
+
+{% endblock %}
+
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+
+    <section class="container organizer-page">
+        <h2 class="text-center mb-4">Organizer Login</h2>
+
+        <div class="row">
+            <!-- Organizer Info -->
+            <div class="col-md-6">
+                <img src="{% static 'images/organizer.png' %}" class="img-fluid rounded mb-4" alt="Organizer">
+                <p class="lead">Log in to your TicketVerse account and manage your events, sales, and tickets with
+                    ease.</p>
+                <ul class="list-group mb-4">
+                    <li class="list-group-item"><i class="fas fa-check-circle text-success"></i> Access your event
+                        dashboard
+                    </li>
+                    <li class="list-group-item"><i class="fas fa-check-circle text-success"></i> Track ticket sales in
+                        real-time
+                    </li>
+                    <li class="list-group-item"><i class="fas fa-check-circle text-success"></i> Manage bookings and
+                        attendees
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Login Form -->
+            <div class="col-md-6">
+                <div class="shadow p-4 bg-white rounded">
+                    <h4 class="mb-3">Log in as an Organizer</h4>
+
+                    <!-- Show validation messages -->
+                    {% if messages %}
+                        <div class="alert alert-danger">
+                            {% for message in messages %}
+                                {{ message }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <form action="{% url 'organizer_login' %}" method="POST">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" name="email" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" name="password" class="form-control" required>
+                        </div>
+
+                        <button type="submit" class="auth-btn w-100">Log In</button>
+                    </form>
+
+                    <hr class="my-4">
+
+                    <p class="text-center">New to TicketVerse?</p>
+                    <a href="{% url 'organizer_signup' %}" class="btn btn-lg btn-success w-100">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block extra_js %}
+{% endblock %}

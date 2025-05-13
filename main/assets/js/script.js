@@ -54,17 +54,24 @@ document.addEventListener("DOMContentLoaded", function () {
 document.getElementById('ticket-category').addEventListener('change', updateTotal);
 let quantity = 1;
 
+document.getElementById('ticket-category').addEventListener('change', updateTotal);
+
 function changeQuantity(amount) {
-    quantity = Math.max(1, quantity + amount);
+    quantity = Math.max(1, quantity + amount);  // Prevent less than 1
     document.getElementById('ticket-quantity').textContent = quantity;
     updateTotal();
 }
 
 function updateTotal() {
-    let ticketPrice = parseInt(document.getElementById('ticket-category').value);
-    let totalPrice = ticketPrice * quantity;
+    const selectedOption = document.getElementById('ticket-category').selectedOptions[0];
+    const ticketPrice = parseInt(selectedOption.getAttribute('data-price'));
+    const totalPrice = ticketPrice * quantity;
     document.getElementById('total-price').textContent = totalPrice.toLocaleString();
 }
+
+
+// Initial load
+updateTotal();
 
 document.addEventListener("DOMContentLoaded", function () {
     let paymentMethods = document.querySelectorAll('input[name="payment-method"]');
@@ -157,3 +164,32 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById(method + '-fields').style.display = 'block';
     }
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    var ctx = document.getElementById('ticketSalesChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+            datasets: [{
+                label: 'Tickets Sold',
+                data: [120, 200, 150, 300, 250],
+                backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {beginAtZero: true}
+            }
+        }
+    });
+});
+
+// Hide flash messages after 3 seconds
+setTimeout(function () {
+    let alerts = document.querySelectorAll('.alert');
+    alerts.forEach(alert => alert.style.display = 'none');
+}, 3000);
