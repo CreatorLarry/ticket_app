@@ -51,10 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-document.getElementById('ticket-category').addEventListener('change', updateTotal);
 let quantity = 1;
-
-document.getElementById('ticket-category').addEventListener('change', updateTotal);
 
 function changeQuantity(amount) {
     quantity = Math.max(1, quantity + amount);  // Prevent less than 1
@@ -63,15 +60,21 @@ function changeQuantity(amount) {
 }
 
 function updateTotal() {
-    const selectedOption = document.getElementById('ticket-category').selectedOptions[0];
-    const ticketPrice = parseInt(selectedOption.getAttribute('data-price'));
-    const totalPrice = ticketPrice * quantity;
-    document.getElementById('total-price').textContent = totalPrice.toLocaleString();
+    const select = document.getElementById('ticket-category');
+    if (select) {
+        const selectedOption = select.options[select.selectedIndex];
+        const ticketPrice = parseInt(selectedOption.getAttribute('data-price'));
+        const totalPrice = ticketPrice * quantity;
+        document.getElementById('total-price').textContent = totalPrice.toLocaleString();
+    }
 }
 
-
-// Initial load
-updateTotal();
+// Run updateTotal on page load if the element exists
+document.addEventListener("DOMContentLoaded", function () {
+    if (document.getElementById('ticket-category')) {
+        updateTotal();
+    }
+});
 
 document.addEventListener("DOMContentLoaded", function () {
     let paymentMethods = document.querySelectorAll('input[name="payment-method"]');

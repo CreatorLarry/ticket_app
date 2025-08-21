@@ -12,59 +12,104 @@
 {% block content %}
     <div class="container cart-page">
         <h2 class="text-center">🛒 Your Cart</h2>
+        {% csrf_token %}
 
         <!-- Cart Items -->
         <div class="row">
             <div class="col-md-8">
+                {% for ticket_id, item in cart_items.items %}
                 <div class="cart-item">
-                    <img src="{% static 'images/food.jpg' %}" alt="Food Festival" class="cart-img">
+                    <img src="{% static 'images/food.jpg' %}" alt="{{ item.event }}" class="cart-img">
                     <div class="cart-info">
-                        <h4>Food & Wine Festival</h4>
-                        <p><i class="fas fa-calendar-alt"></i> May 10, 2025</p>
-                        <p><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
-                        <p class="price">Ksh 2,000</p>
+                        <h4>{{ item.event }}</h4>
+                        <p class="price">Ksh {{ item.price|floatformat:2 }}</p>
                         <div class="quantity">
-                            <button class="qty-btn" onclick="decreaseQty(this)">-</button>
-                            <span class="qty">1</span>
-                            <button class="qty-btn" onclick="increaseQty(this)">+</button>
+                            <button class="qty-btn" onclick="updateCart('{{ ticket_id }}', -1)">-</button>
+                            <span class="qty">{{ item.quantity }}</span>
+                            <button class="qty-btn" onclick="updateCart('{{ ticket_id }}', 1)">+</button>
                         </div>
                     </div>
-                    <button class="remove-btn">🗑️</button>
+                    <button class="remove-btn" onclick="removeFromCart('{{ ticket_id }}')">🗑️</button>
                 </div>
-
-                <div class="cart-item">
-                    <img src="{% static 'images/run.jpg' %}" alt="Marathon" class="cart-img">
-                    <div class="cart-info">
-                        <h4>International Marathon</h4>
-                        <p><i class="fas fa-calendar-alt"></i> June 20, 2025</p>
-                        <p><i class="fas fa-map-marker-alt"></i> Mombasa, Kenya</p>
-                        <p class="price">Ksh 1,500</p>
-                        <div class="quantity">
-                            <button class="qty-btn" onclick="decreaseQty(this)">-</button>
-                            <span class="qty">1</span>
-                            <button class="qty-btn" onclick="increaseQty(this)">+</button>
-                        </div>
-                    </div>
-                    <button class="remove-btn">🗑️</button>
-                </div>
+                {% empty %}
+                <p>Your cart is empty.</p>
+                {% endfor %}
             </div>
 
             <!-- Summary -->
             <div class="col-md-4">
                 <div class="cart-summary">
                     <h3>Order Summary</h3>
-                    <p>Subtotal: <span id="subtotal">Ksh 3,500</span></p>
+                    <p>Subtotal: <span id="subtotal">Ksh 0</span></p>
                     <p>Service Fee: <span>Ksh 200</span></p>
-                    <h4>Total: <span id="total">Ksh 3,700</span></h4>
+                    <h4>Total: <span id="total">Ksh 0</span></h4>
                     <a href="#" class="btn btn-primary btn-block">Proceed to Checkout</a>
                 </div>
             </div>
         </div>
     </div>
-
 {% endblock %}
 
 {% block extra_js %}
+<script>
+    function updateCart(ticketId, change) {
+        // Get current cart from session
+        fetch(`/update-cart/${ticketId}/${change}/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                location.reload();
+            }
+        });
+    }
 
+    function removeFromCart(ticketId) {
+        // Remove item from cart
+        fetch(`/remove-from-cart/${ticketId}/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                location.reload();
+            }
+        });
+    }
+
+    // Update cart total
+    function updateCartTotal() {
+        let subtotal = 0;
+        let serviceFee = 200;
+
+        document.querySelectorAll(".cart-item").forEach(item => {
+            let priceText = item.querySelector(".price").innerText;
+            let price = parseFloat(priceText.replace("Ksh ", "").replace(",", ""));
+            let qty = parseInt(item.querySelector(".qty").innerText);
+
+            subtotal += price * qty;
+        });
+
+        document.getElementById("subtotal").innerText = "Ksh " + subtotal.toLocaleString('en-KE', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+        document.getElementById("total").innerText = "Ksh " + (subtotal + serviceFee).toLocaleString('en-KE', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+    }
+
+    // Update total on page load
+    document.addEventListener("DOMContentLoaded", updateCartTotal);
+</script>
 {% endblock %}
-

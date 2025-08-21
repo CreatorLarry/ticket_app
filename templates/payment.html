@@ -18,12 +18,12 @@
             <div class="col-md-6">
                 <div class="order-summary">
                     <h4>Order Summary</h4>
-                    <p><strong>Event:</strong> <span id="event-name">Food & Wine Festival</span></p>
-                    <p><strong>Date:</strong> <span id="event-date">May 10, 2025</span></p>
-                    <p><strong>Location:</strong> <span id="event-location">Nairobi, Kenya</span></p>
-                    <p><strong>Ticket Type:</strong> <span id="ticket-type">VIP</span></p>
-                    <p><strong>Quantity:</strong> <span id="ticket-quantity">2</span></p>
-                    <p class="total-price"><strong>Total Price: Ksh <span id="total-price">10,000</span></strong></p>
+                    <p><strong>Event:</strong> <span id="event-name">{{ order.event.title }}</span></p>
+                    <p><strong>Date:</strong> <span id="event-date">{{ order.event.date }}</span></p>
+                    <p><strong>Location:</strong> <span id="event-location">{{ order.event.location }}</span></p>
+                    <p><strong>Ticket Type:</strong> <span id="ticket-type">{{ order.ticket.get_category_display }}</span></p>
+                    <p><strong>Quantity:</strong> <span id="ticket-quantity">{{ order.quantity }}</span></p>
+                    <p class="total-price"><strong>Total Price: Ksh <span id="total-price">{{ order.total_price }}</span></strong></p>
                 </div>
             </div>
 

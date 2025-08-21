@@ -1,5 +1,7 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import get_user_model
+
 
 from .models import Event, Ticket, Order, Organizer
 
@@ -20,14 +22,14 @@ class TicketBookingForm(forms.Form):
             self.fields['ticket'].queryset = Ticket.objects.filter(event=event)
 
 
-class OrganizerSignUpForm(UserCreationForm):
+class OrganizerRegistrationForm(UserCreationForm):
     class Meta:
         model = Organizer
         fields = ['email', 'name', 'phone', 'password1', 'password2']
 
 
 class OrganizerLoginForm(forms.Form):
-    username = forms.CharField()
+    email = forms.EmailField()
     password = forms.CharField(widget=forms.PasswordInput)
 
 

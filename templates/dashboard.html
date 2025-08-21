@@ -17,10 +17,10 @@
                 <div class="sidebar">
                     <h3>Dashboard</h3>
                     <ul>
-                        <li><a href="#">🏠 Home</a></li>
+                        <li><a href="{% url 'home' %}">🏠 Home</a></li>
                         <li><a href="#">🎟 My Tickets</a></li>
                         <li><a href="#">⚙️ Profile Settings</a></li>
-                        <li><a href="#">🚪 Logout</a></li>
+                        <li><a href="{% url 'logout' %}">🚪 Logout</a></li>
                     </ul>
                 </div>
             </div>
@@ -29,32 +29,25 @@
             <div class="col-md-9">
                 <h2>My Tickets</h2>
                 <div class="ticket-list">
-                    <!-- Example Ticket -->
+                    {% for order in orders %}
                     <div class="ticket-card">
                         <div class="ticket-info">
-                            <h4>Food & Wine Festival</h4>
-                            <p><i class="fas fa-calendar-alt"></i> May 10, 2025</p>
-                            <p><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
-                            <p class="status active">✅ Active</p>
+                            <h4>{{ order.event.title }}</h4>
+                            <p><i class="fas fa-calendar-alt"></i> {{ order.event.date }}</p>
+                            <p><i class="fas fa-map-marker-alt"></i> {{ order.event.location }}</p>
+                            <p><i class="fas fa-ticket-alt"></i> {{ order.ticket.get_category_display }} ({{ order.quantity }} tickets)</p>
+                            <p class="status {% if order.payment_status %}active{% else %}expired{% endif %}">
+                                {% if order.payment_status %}✅ Active{% else %}🕒 Pending Payment{% endif %}
+                            </p>
                         </div>
                         <div class="ticket-actions">
-                            <a href="#" class="btn btn-primary">Download PDF</a>
+                            <a href="{% url 'download_ticket' order.id %}" class="btn btn-primary">Download PDF</a>
                             <a href="#" class="btn btn-outline-secondary">View QR Code</a>
                         </div>
                     </div>
-
-                    <div class="ticket-card">
-                        <div class="ticket-info">
-                            <h4>International Marathon</h4>
-                            <p><i class="fas fa-calendar-alt"></i> June 20, 2025</p>
-                            <p><i class="fas fa-map-marker-alt"></i> Mombasa, Kenya</p>
-                            <p class="status expired">❌ Expired</p>
-                        </div>
-                        <div class="ticket-actions">
-                            <a href="#" class="btn btn-secondary disabled">Download PDF</a>
-                            <a href="#" class="btn btn-outline-secondary">View QR Code</a>
-                        </div>
-                    </div>
+                    {% empty %}
+                    <p>You haven't purchased any tickets yet.</p>
+                    {% endfor %}
                 </div>
             </div>
         </div>

@@ -28,7 +28,7 @@
                 <select id="ticket-category" class="form-control">
                     {% for ticket in tickets %}
                         <option value="{{ ticket.id }}" data-price="{{ ticket.price }}">
-                            {{ ticket.get_category_display }} - Ksh {{ ticket.price|floatformat:0 }}
+                            {{ ticket.get_category_display }} - Ksh {{ ticket.price|floatformat:2 }}
                         </option>
                     {% endfor %}
                 </select>
@@ -42,14 +42,12 @@
                 </div>
 
                 <!-- Total Price -->
-                <p class="event-price mt-2"><strong>Total Price: Ksh <span id="total-price">2,000</span></strong></p>
+                <p class="event-price mt-2"><strong>Total Price: Ksh <span id="total-price">{{ totalPrice }}</span></strong></p>
 
                 <!-- Buyer Details Form -->
                 <h4 class="mt-4">Your Details</h4>
-                <form method="POST" id="buyer-form">
+                <form method="POST" action="{% url 'book_ticket' event.id %}" id="buyer-form">
                     {% csrf_token %}
-                    {#                    <input type="hidden" name="ticket_id" id="ticket-id-input">#}
-                    {#                    <input type="hidden" name="quantity" id="quantity-input">#}
                     <input type="hidden" name="ticket_id" id="hidden-ticket-id">
                     <input type="hidden" name="quantity" id="hidden-quantity">
                     <input type="hidden" name="total_price" id="hidden-total">
@@ -68,6 +66,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary book-btn">Proceed to Payment</button>
+                    <button type="button" class="btn btn-secondary" onclick="addToCart()">Add to Cart</button>
                 </form>
 
 
@@ -110,10 +109,13 @@
         function updateTotal() {
             const select = document.getElementById('ticket-category');
             const selectedOption = select.options[select.selectedIndex];
-            const ticketPrice = parseInt(selectedOption.getAttribute('data-price'));
+            const ticketPrice = parseFloat(selectedOption.getAttribute('data-price'));
             const totalPrice = ticketPrice * quantity;
-
-            document.getElementById('total-price').textContent = totalPrice.toLocaleString();
+            
+            document.getElementById('total-price').textContent = totalPrice.toLocaleString('en-KE', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
         }
 
         // Run on page load to set correct total
@@ -127,13 +129,48 @@
         const select = document.getElementById('ticket-category');
         const selectedOption = select.options[select.selectedIndex];
         const ticketId = selectedOption.value;
-        const price = parseInt(selectedOption.getAttribute('data-price'));
+        const price = parseFloat(selectedOption.getAttribute('data-price'));
         const totalPrice = price * quantity;
 
         document.getElementById('hidden-ticket-id').value = ticketId;
         document.getElementById('hidden-quantity').value = quantity;
-        document.getElementById('hidden-total').value = totalPrice;
+        document.getElementById('hidden-total').value = totalPrice.toFixed(2);
     });
+
+    function addToCart() {
+        const select = document.getElementById('ticket-category');
+        const selectedOption = select.options[select.selectedIndex];
+        const ticketId = selectedOption.value;
+        
+        // Add to cart via AJAX
+        fetch('/add-to-cart/' + ticketId + '/', {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'quantity=' + quantity
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Update cart badge
+                const cartBadge = document.querySelector('.cart-badge');
+                if (cartBadge) {
+                    cartBadge.textContent = data.cart_count;
+                }
+                alert('Ticket added to cart successfully!');
+                // Redirect to cart page
+                window.location.href = '/cart/';
+            } else {
+                alert('Error adding to cart.');
+            }
+        })
+        .catch(error => {
+            console.error('Error adding to cart:', error);
+            alert('Error adding to cart. Please try again.');
+        });
+    }
 
     </script>
 

@@ -61,9 +61,15 @@ function changeQuantity(amount) {
 }
 
 function updateTotal() {
-    let ticketPrice = parseInt(document.getElementById('ticket-category').value);
-    let totalPrice = ticketPrice * quantity;
-    document.getElementById('total-price').textContent = totalPrice.toLocaleString();
+    const select = document.getElementById('ticket-category');
+    const selectedOption = select.options[select.selectedIndex];
+    const ticketPrice = parseFloat(selectedOption.getAttribute('data-price'));
+    const totalPrice = ticketPrice * quantity;
+    
+    document.getElementById('total-price').textContent = totalPrice.toLocaleString('en-KE', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -86,7 +92,6 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("event-date").textContent = localStorage.getItem("eventDate") || "May 10, 2025";
     document.getElementById("event-location").textContent = localStorage.getItem("eventLocation") || "Nairobi, Kenya";
     document.getElementById("ticket-type").textContent = localStorage.getItem("ticketType") || "VIP";
-    document.getElementById("ticket-quantity").textContent = localStorage.getItem("ticketQuantity") || "2";
     document.getElementById("total-price").textContent = localStorage.getItem("totalPrice") || "10,000";
 });
 
@@ -112,14 +117,20 @@ function updateCartTotal() {
 
     document.querySelectorAll(".cart-item").forEach(item => {
         let priceText = item.querySelector(".price").innerText;
-        let price = parseInt(priceText.replace("Ksh ", "").replace(",", ""));
+        let price = parseFloat(priceText.replace("Ksh ", "").replace(",", ""));
         let qty = parseInt(item.querySelector(".qty").innerText);
 
         subtotal += price * qty;
     });
 
-    document.getElementById("subtotal").innerText = "Ksh " + subtotal.toLocaleString();
-    document.getElementById("total").innerText = "Ksh " + (subtotal + serviceFee).toLocaleString();
+    document.getElementById("subtotal").innerText = "Ksh " + subtotal.toLocaleString('en-KE', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
+    document.getElementById("total").innerText = "Ksh " + (subtotal + serviceFee).toLocaleString('en-KE', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
 }
 
 // Update total on page load

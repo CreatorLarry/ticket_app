@@ -118,6 +118,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+
 AUTH_USER_MODEL = 'main.Organizer'
 
 # Internationalization
@@ -136,9 +138,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-STATIC_ROOT = BASE_DIR / 'assets'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-STATICFILES_DIRS = [BASE_DIR / 'main/assets']
+STATICFILES_DIRS = [BASE_DIR / 'assets']
 
 MEDIA_URL = '/media/'
 
@@ -147,3 +149,15 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# settings.py
+LOGIN_URL = 'login'   # or 'organizer_login' if that’s the one you want
+LOGIN_REDIRECT_URL = 'dashboard'  # where to send them after login
+LOGOUT_REDIRECT_URL = 'home'      # after logout
+
+
+AUTH_USER_MODEL = "main.Organizer"
+
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+]

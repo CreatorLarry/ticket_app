@@ -1,0 +1,951 @@
+/* General Styles */
+body {
+    font-family: "Oswald", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background: rgba(25, 25, 25, 0.7); /* Dark gray transparent */
+    backdrop-filter: blur(5px);
+    border-radius: 50px;
+    padding: 12px 30px;
+    margin: 15px auto;
+    width: 90%;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Navbar Blur Effect on Scroll */
+.navbar.scrolled {
+    background: rgba(15, 15, 15, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 8px 25px;
+}
+
+
+/* Navbar Links */
+.navbar-nav {
+    display: flex;
+    gap: 40px; /* Increased spacing between links */
+}
+
+.navbar-nav .nav-link {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #f8f9fa;
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ffcc00; /* Highlight color */
+}
+
+/* Get Started Button */
+.nav-btn {
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-weight: bold;
+    background: linear-gradient(to right, #ff8800, #ff5500);
+    border: none;
+    transition: 0.3s;
+}
+
+.nav-btn:hover {
+    background: linear-gradient(to right, #ff5500, #ff8800);
+}
+
+@media (min-width: 992px) {
+    .navbar-nav .nav-btn {
+        display: none;
+    }
+}
+
+/* Cart Icon */
+.cart-icon {
+    color: white;
+    font-size: 20px;
+    margin-right: 15px;
+    position: relative;
+    text-decoration: none;
+    margin-top: 8px;
+}
+
+.cart-icon:hover {
+    color: #ffcc00; /* Highlight color */
+}
+
+.cart-badge {
+    position: absolute;
+    top: -5px;
+    right: -8px;
+    background: red;
+    color: white;
+    font-size: 12px;
+    padding: 3px 6px;
+    border-radius: 50%;
+}
+
+
+/* Hero Section */
+.hero {
+    background: url('../images/hero-bg.jpg') center/cover;
+    color: white;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.hero p {
+    font-size: 1.2rem;
+}
+
+.primary-btn {
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-weight: bold;
+    background: linear-gradient(to right, #ff8800, #ff5500);
+    border: none;
+    transition: 0.3s;
+}
+
+.primary-btn:hover {
+    background: linear-gradient(to right, #ff5500, #ff8800);
+}
+
+.event-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.event-card img {
+    height: 180px;
+    object-fit: cover;
+}
+
+.event-card .card-body {
+    text-align: center;
+    padding: 20px;
+}
+
+.event-card h5 {
+    font-weight: 600;
+    color: #333;
+}
+
+.event-date, .event-location, .event-price {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.event-price {
+    font-weight: bold;
+    color: #ff8800;
+}
+
+.event-category {
+    background: #ff5722;
+    color: white;
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    border-radius: 15px;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+
+/* Make event cards smaller on smaller screens */
+@media (max-width: 768px) {
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .col-md-4 {
+        flex: 0 0 48%; /* Ensures two cards per row */
+        max-width: 48%;
+    }
+
+    .card {
+        border-radius: 10px; /* Smooth edges */
+        overflow: hidden;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .card img {
+        width: 100%;
+        height: 150px; /* Keeps images uniform */
+        object-fit: cover;
+    }
+
+    .card-body {
+        padding: 12px;
+    }
+
+    .card-title {
+        font-size: 1rem;
+        font-weight: bold;
+    }
+
+    .card-text {
+        font-size: 0.85rem;
+    }
+
+    .btn {
+        display: block;
+        width: 80%;
+        margin: 10px auto;
+        padding: 6px 12px;
+        font-size: 0.85rem;
+        border-radius: 20px;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .event-card {
+        margin-bottom: 20px;
+    }
+}
+
+.trending-badge {
+    background: #ff9800;
+    color: white;
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    border-radius: 5px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+/* Trending Events Section */
+.trending-events .carousel-inner {
+    padding-bottom: 50px; /* Space for indicators */
+}
+
+.trending-events .carousel-indicators {
+    position: absolute;
+    bottom: 15px;
+}
+
+.trending-events .carousel-indicators button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.4);
+    margin: 0 5px;
+    transition: background-color 0.3s;
+}
+
+.trending-events .carousel-indicators button.active {
+    background-color: #ff5733;
+}
+
+/* Event Card Styling */
+.event-card {
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.event-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.event-card img {
+    height: 250px;
+    object-fit: cover;
+}
+
+.event-card .card-body {
+    text-align: center;
+    padding: 20px;
+}
+
+.event-card .card-title {
+    font-weight: 600;
+    color: #333;
+}
+
+.event-card .card-text {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.event-price {
+    color: #ff5733;
+    font-size: 1.1rem;
+}
+
+/* Carousel Controls */
+.custom-carousel-control {
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    transition: background-color 0.3s;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.custom-carousel-control:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.carousel-control-prev.custom-carousel-control {
+    left: 15px;
+}
+
+.carousel-control-next.custom-carousel-control {
+    right: 15px;
+}
+
+/* Responsive: One card per slide on smaller screens */
+@media (max-width: 768px) {
+    .trending-events .carousel-item .row {
+        flex-direction: column;
+    }
+
+    .trending-events .col-md-6 {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+/* Footer Styling */
+.footer {
+    background: #222;
+    color: #fff;
+    font-size: 0.9rem;
+}
+
+.footer-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.footer-link {
+    color: #ddd;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-link:hover {
+    color: #ff5733;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.social-icon {
+    color: #ddd;
+    font-size: 1.2rem;
+    transition: color 0.3s;
+}
+
+.social-icon:hover {
+    color: #ff5733;
+}
+
+/* Responsive Footer */
+@media (max-width: 768px) {
+    .footer .row {
+        text-align: center;
+    }
+}
+
+span {
+    color: #ff5733;
+}
+
+.developer-name {
+    text-decoration: none;
+}
+
+.developer {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+/* Expired Event Styling */
+.expired-event {
+    opacity: 0.6; /* Faded effect */
+    pointer-events: none; /* Prevent clicking */
+    filter: grayscale(20%); /* Slight desaturation */
+}
+
+.expired-event:hover {
+    transform: none; /* Disable hover effects */
+    box-shadow: none; /* No shadow effect */
+}
+
+.event-container {
+    margin-top: 15px;
+}
+
+/* Search & Filter Section */
+.search-filter-section {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 100px;
+}
+
+.search-filter-section-top {
+    margin-top: 100px;
+}
+
+/* Search Bar */
+.search-form {
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    border: 1px solid #ddd;
+    border-radius: 20px 0 0 20px;
+    padding: 8px 12px;
+    font-size: 14px;
+    width: 100%;
+}
+
+.search-btn {
+    border: none;
+    background: #ff5733;
+    color: white;
+    border-radius: 0 20px 20px 0;
+    padding: 8px 12px;
+    transition: 0.3s;
+}
+
+.search-btn:hover {
+    background: #ff914d;
+}
+
+/* Dropdown Filters */
+.filter-dropdown {
+    border-radius: 20px;
+    padding: 8px 12px;
+    font-size: 14px;
+    width: auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .search-filter-section {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .search-form {
+        margin-bottom: 10px;
+    }
+
+    .filter-dropdown {
+        width: 100%;
+    }
+}
+
+/* Event Details */
+.event-details {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 100px;
+}
+
+/* Event Image */
+.event-img {
+    width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* Event Title */
+.event-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Event Date & Location */
+.event-date, .event-location {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.event-price {
+    font-size: 1.2rem;
+    color: #ff5733;
+    font-weight: bold;
+}
+
+/* Description */
+.event-description {
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.6;
+}
+
+/* Book Ticket Button */
+.book-btn {
+    background: #ff5733;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+.book-btn:hover {
+    background: #ff914d;
+}
+
+/* Social Share */
+.social-share {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.social-icon {
+    color: #444;
+    font-size: 1.2rem;
+    transition: 0.3s;
+}
+
+.social-icon:hover {
+    color: #ff5733;
+}
+
+/* Additional Event Info */
+.event-extra {
+    margin-top: 30px;
+    padding: 15px;
+    border-top: 1px solid #ddd;
+}
+
+/* Quantity Selector */
+.quantity-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.2rem;
+}
+
+.event-price {
+    font-size: 1.2rem;
+    color: #ff5733;
+    font-weight: bold;
+}
+
+/* Buyer Form */
+#buyer-form {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+/* Payment Section */
+.payment-section {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 100px;
+}
+
+/* Order Summary */
+.order-summary {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.total-price {
+    font-size: 1.2rem;
+    color: #ff5733;
+    font-weight: bold;
+}
+
+/* Payment Methods */
+.payment-methods {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.payment-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: 0.3s;
+}
+
+.payment-option:hover {
+    background: #ff914d;
+    color: white;
+}
+
+.payment-option input {
+    margin-right: 10px;
+}
+
+/* Payment Button */
+.pay-btn {
+    background: #ff5733;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 1rem;
+}
+
+.pay-btn:hover {
+    background: #ff914d;
+}
+
+.pay-btn:active {
+    background: #ff5733;
+}
+
+/* Hide non-selected payment inputs */
+.payment-detail {
+    display: none;
+}
+
+.payment-detail.active {
+    display: block;
+    margin-top: 10px;
+}
+
+.confirmation-container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.confirmation-box {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+}
+
+.check-icon {
+    font-size: 60px;
+    color: #28a745;
+}
+
+.order-summary, .download-ticket {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.qr-code {
+    width: 150px;
+    height: 150px;
+}
+
+.confirmation-actions .btn {
+    margin: 10px;
+}
+
+/* Dashboard Styling */
+.dashboard {
+    padding: 20px;
+    margin-top: 100px;
+}
+
+.sidebar {
+    background: #343a40;
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+}
+
+.sidebar h3 {
+    text-align: center;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 10px 0;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar ul li a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px;
+    border-radius: 5px;
+}
+
+/* Ticket Cards */
+.ticket-card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.ticket-info {
+    flex-grow: 1;
+}
+
+.status.active {
+    color: green;
+}
+
+.status.expired {
+    color: red;
+}
+
+.ticket-actions a {
+    margin: 5px;
+}
+
+/* Auth Container */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, #ff5733, #ff914d);
+}
+
+/* Auth Box */
+.auth-box {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+.auth-box:hover {
+    transform: scale(1.02);
+}
+
+/* Auth Title */
+.auth-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.auth-subtitle {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Input Fields */
+.input-group {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 15px;
+    background: #f9f9f9;
+}
+
+.input-group i {
+    color: #ff5733;
+    margin-right: 10px;
+}
+
+.input-group input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 16px;
+    background: transparent;
+}
+
+/* Auth Button */
+.auth-btn {
+    background: #ff5733;
+    color: white;
+    font-size: 18px;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.auth-btn:hover {
+    background: #ff914d;
+}
+
+/* Footer Links */
+.auth-footer {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #666;
+}
+
+.auth-footer a {
+    color: #ff5733;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+.cart-page {
+    padding: 20px;
+    margin-top: 100px;
+}
+
+/* Cart Items */
+.cart-item {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cart-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    margin-right: 15px;
+}
+
+.cart-info {
+    flex-grow: 1;
+}
+
+.price {
+    font-weight: bold;
+    color: #28a745;
+}
+
+.quantity {
+    display: flex;
+    align-items: center;
+}
+
+.qty-btn {
+    background: #ddd;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.qty {
+    margin: 0 10px;
+}
+
+.remove-btn {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: red;
+}
+
+/* Summary */
+.cart-summary {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.organizer-page {
+    margin-top: 100px;
+}
+
+.organizer-btn {
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 1rem;
+    background: #ff914d;
+}
+
+.main-container, .create-event {
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.alert {
+    display: none;
+}
+
+.section-wrapper {
+    min-height: 100vh;
+}

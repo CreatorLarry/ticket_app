@@ -19,18 +19,18 @@
             <!-- Order Summary -->
             <div class="order-summary mt-4">
                 <h4>Order Summary</h4>
-                <p><strong>Event:</strong> Food & Wine Festival</p>
-                <p><strong>Ticket Type:</strong> VIP</p>
-                <p><strong>Quantity:</strong> 2</p>
-                <p><strong>Total Paid:</strong> Ksh 10,000</p>
+                <p><strong>Event:</strong> {{ order.event.title }}</p>
+                <p><strong>Ticket Type:</strong> {{ order.ticket.get_category_display }}</p>
+                <p><strong>Quantity:</strong> {{ order.quantity }}</p>
+                <p><strong>Total Paid:</strong> Ksh {{ order.total_price }}</p>
             </div>
 
             <!-- Ticket Download Section -->
             <div class="download-ticket mt-4">
                 <h4>Your Ticket</h4>
-                <img src="{% static 'images/qr_code_sample.png' %}" alt="QR Code Ticket" class="qr-code">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data={{ qr_data|urlencode }}" alt="QR Code Ticket" class="qr-code">
                 <p class="mt-2">Show this QR code at the entrance.</p>
-                <a href="#" class="btn btn-primary mt-3">Download Ticket</a>
+                <a href="{% url 'download_ticket' order.id %}" class="btn btn-primary mt-3">Download Ticket</a>
             </div>
 
             <!-- Actions -->
